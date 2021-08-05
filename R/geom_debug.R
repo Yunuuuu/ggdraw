@@ -24,7 +24,7 @@ geom_debug <- function(debug = "head", type = NULL,
 
   if (is.null(type)) type <- "group" else {
     type <- tolower(as.character(type))
-    type <- match.arg(type, c("panel", "group"))
+    type <- match.arg(type, c("group", "panel"))
   }
 
   test_debug <- rlang::is_function(debug) || rlang::is_scalar_character(debug) || rlang::is_symbol(debug)

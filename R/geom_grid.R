@@ -42,7 +42,7 @@ geom_draw <- function(draw = grid::nullGrob(), type = NULL,
 
   if (is.null(type)) type <- "group" else {
     type <- tolower(as.character(type))
-    type <- match.arg(type, c("panel", "group"))
+    type <- match.arg(type, c("group", "panel"))
   }
 
   test_draw <- grid::is.grob(draw) || rlang::is_function(draw) || rlang::is_scalar_character(draw) || rlang::is_symbol(draw)
