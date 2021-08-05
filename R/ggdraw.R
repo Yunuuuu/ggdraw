@@ -4,7 +4,6 @@
 #'   by [gggrid](https://github.com/pmur002/gggrid) but adjusted with a lot of
 #'   personal convention. See [gggrid: it's
 #'   g-g-great!](https://www.stat.auckland.ac.nz/~paul/Reports/gggrid/gggrid.html)
-#'
 #' @author Yun \email{yunyunpp96@@outlook.com}
 #' @seealso Useful links:
 #' * \url{https://ggplot2.tidyverse.org}
