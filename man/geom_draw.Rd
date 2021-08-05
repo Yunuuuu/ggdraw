@@ -23,11 +23,11 @@ two arguments (\code{data} and \code{coords}) and returns a
 scales. \cr \cr It is important to note that the columns names for the data
 and coords come from the aesthetic mappings in the \code{ggplot2} plot.}
 
-\item{type}{\code{group} or \code{panel}, group which draws geom with
-\code{draw_group} draws collective geoms that display multiple observations
-with one geometric object and \code{panel} which draws geom with
-\code{draw_panel} draws individual geoms that display a distinct graphical
-object for each observation (row). Default: \code{group}}
+\item{type}{a scalar character of \code{group} or \code{panel}, group which
+draws geom with \code{draw_group} draws collective geoms that display
+multiple observations with one geometric object and \code{panel} which
+draws geom with \code{draw_panel} draws individual geoms that display a
+distinct graphical object for each observation (row). Default: \code{group}}
 
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
 \code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the

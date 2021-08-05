@@ -8,11 +8,11 @@
 #'   \code{data}, coords is value that have already been transformed to the plot
 #'   scales. \cr \cr It is important to note that the columns names for the data
 #'   and coords come from the aesthetic mappings in the \code{ggplot2} plot.
-#' @param type \code{group} or \code{panel}, group which draws geom with
-#'   \code{draw_group} draws collective geoms that display multiple observations
-#'   with one geometric object and \code{panel} which draws geom with
-#'   \code{draw_panel} draws individual geoms that display a distinct graphical
-#'   object for each observation (row). Default: `group`
+#' @param type a scalar character of \code{group} or \code{panel}, group which
+#'   draws geom with \code{draw_group} draws collective geoms that display
+#'   multiple observations with one geometric object and \code{panel} which
+#'   draws geom with \code{draw_panel} draws individual geoms that display a
+#'   distinct graphical object for each observation (row). Default: `group`
 #' @inheritParams ggplot2::layer
 #' @param ... Other arguments passed on to [ggplot2::layer()]. These are often
 #'   aesthetics, used to set an aesthetic to a fixed value, like `colour =
