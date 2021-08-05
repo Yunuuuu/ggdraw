@@ -79,13 +79,13 @@ or a \code{\link[grid:grid.grob]{grid::gTree}} (a grob containing multiple child
 call is \code{draw_panel()}.
 }
 \examples{
-gggrid_text <- grid::textGrob(
-  "gggrid",
+ggdraw_text <- grid::textGrob(
+  "ggdraw",
   x = c(0, 0, 0.5, 1, 1),
   y = c(0, 1, 0.5, 0, 1),
   hjust = c(0, 0, 0.5, 1, 1),
   vjust = c(0, 1, 0.5, 0, 1)
 )
 ggplot2::ggplot(data.frame(x = 1, y = 2))+
-  geom_draw(gggrid_text)
+  geom_draw(ggdraw_text)
 }

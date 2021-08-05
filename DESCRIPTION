@@ -1,6 +1,6 @@
 Package: ggdraw
 Type: Package
-Title: Draw with grob or function in 'ggplot2'
+Title: Draw with grob or function in ggplot2
 Version: 0.0.1
 Author: person("Yun", "Peng", email = yunyunpp96@outlook.com,
                role = c("aut", "cre"))
