@@ -17,8 +17,10 @@ geom_debug(
 }
 \arguments{
 \item{debug}{a function which conducted with argument \code{coords}. \cr \cr
-coords is value that have already been transformed to the plot scales.
-Default: \code{head}}
+coords is value that have already been transformed to the plot scales. \cr
+\cr It is important to note that the columns names for the data and coords
+come from the aesthetic mappings in the \code{ggplot2} plot. Default:
+\code{head}}
 
 \item{type}{\code{group} or \code{panel}, group which draws geom with
 \code{draw_group} draws collective geoms that display multiple observations
@@ -54,7 +56,8 @@ a call to a position adjustment function.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. These are often
 aesthetics, used to set an aesthetic to a fixed value, like colour = "red"
-or size = 3. They may also be parameters to the paired geom/stat.}
+or size = 3. They may also be parameters to the paired geom/stat. other
+arguments of function \code{debug} can be passed here.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions

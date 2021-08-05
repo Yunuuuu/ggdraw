@@ -20,7 +20,8 @@ geom_draw(
 two arguments (\code{data} and \code{coords}) and returns a
 \link[grid:grid.grob]{grob}. \cr \cr \code{data} contains value from parameter
 \code{data}, coords is value that have already been transformed to the plot
-scales.}
+scales. \cr \cr It is important to note that the columns names for the data
+and coords come from the aesthetic mappings in the \code{ggplot2} plot.}
 
 \item{type}{\code{group} or \code{panel}, group which draws geom with
 \code{draw_group} draws collective geoms that display multiple observations
@@ -55,8 +56,8 @@ layer, as a string.}
 a call to a position adjustment function.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}. These are often
-aesthetics, used to set an aesthetic to a fixed value, like colour = "red"
-or size = 3. They may also be parameters to the paired geom/stat.}
+aesthetics, used to set an aesthetic to a fixed value, like \code{colour = "red"} or \code{size = 3}. They may also be parameters to the paired geom/stat.
+Other arguments of function \code{draw} can be passed here.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
@@ -68,6 +69,14 @@ a ggplot2 layer object
 }
 \description{
 Draw ggplot2 layer with a grod or function.
+}
+\details{
+If you want to combine the functionality of multiple geoms it can
+usually be achieved by preparing the data for each of the geoms inside the
+\verb{draw_*()} call and send it off to the different geoms, collecting the
+output in a \code{\link[grid:grid.grob]{grid::gList}} (a list of grobs) if the call is \code{draw_group()}
+or a \code{\link[grid:grid.grob]{grid::gTree}} (a grob containing multiple children grobs) if the
+call is \code{draw_panel()}.
 }
 \examples{
 gggrid_text <- grid::textGrob(

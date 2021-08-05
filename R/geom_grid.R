@@ -6,7 +6,8 @@
 #'   two arguments (\code{data} and \code{coords}) and returns a
 #'   [grob][grid::grob]. \cr \cr \code{data} contains value from parameter
 #'   \code{data}, coords is value that have already been transformed to the plot
-#'   scales.
+#'   scales. \cr \cr It is important to note that the columns names for the data
+#'   and coords come from the aesthetic mappings in the \code{ggplot2} plot.
 #' @param type \code{group} or \code{panel}, group which draws geom with
 #'   \code{draw_group} draws collective geoms that display multiple observations
 #'   with one geometric object and \code{panel} which draws geom with
@@ -14,9 +15,16 @@
 #'   object for each observation (row). Default: `group`
 #' @inheritParams ggplot2::layer
 #' @param ... Other arguments passed on to [ggplot2::layer()]. These are often
-#'   aesthetics, used to set an aesthetic to a fixed value, like colour = "red"
-#'   or size = 3. They may also be parameters to the paired geom/stat.
+#'   aesthetics, used to set an aesthetic to a fixed value, like `colour =
+#'   "red"` or `size = 3`. They may also be parameters to the paired geom/stat.
+#'   Other arguments of function `draw` can be passed here.
 #' @return a ggplot2 layer object
+#' @details If you want to combine the functionality of multiple geoms it can
+#'   usually be achieved by preparing the data for each of the geoms inside the
+#'   `draw_*()` call and send it off to the different geoms, collecting the
+#'   output in a [`grid::gList`] (a list of grobs) if the call is `draw_group()`
+#'   or a [`grid::gTree`] (a grob containing multiple children grobs) if the
+#'   call is `draw_panel()`.
 #' @examples
 #' gggrid_text <- grid::textGrob(
 #'   "gggrid",
@@ -62,7 +70,7 @@ geom_draw <- function(draw = grid::nullGrob(), type = NULL,
 
 }
 
-draw_fn <- function(data, panel_params, coord, draw) {
+draw_fn <- function(data, panel_params, coord, draw, ...) {
 
   if (grid::is.grob(draw)) {
 
@@ -71,7 +79,7 @@ draw_fn <- function(data, panel_params, coord, draw) {
   } else {
 
     coords <- coord$transform(data, panel_params)
-    rlang::exec(draw, data = data, coords = coords)
+    rlang::exec(draw, data = data, coords = coords, ...)
 
   }
 }
