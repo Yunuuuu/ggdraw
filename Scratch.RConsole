@@ -1,0 +1,2 @@
+usethis::use_git_ignore("Simulation.RConsole")
+usethis::use_build_ignore("Simulation.RConsole", escape = TRUE)

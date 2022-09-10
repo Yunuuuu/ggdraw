@@ -1,6 +1,6 @@
 #' Debug ggplot2
 #'
-#' Debug ggplot2 by operate data with a function.
+#' Debug ggplot2 by operating data with a function.
 #'
 #' @param debug a function which conducted with argument \code{coords}. \cr \cr
 #'   coords is value that have already been transformed to the plot scales. \cr
@@ -21,8 +21,9 @@
 geom_debug <- function(debug = "head", type = NULL,
                        mapping = NULL, data = NULL, stat = "identity",
                        position = "identity", ..., inherit.aes = TRUE) {
-
-  if (is.null(type)) type <- "group" else {
+  if (is.null(type)) {
+    type <- "group"
+  } else {
     type <- tolower(as.character(type))
     type <- match.arg(type, c("group", "panel"))
   }
@@ -31,31 +32,29 @@ geom_debug <- function(debug = "head", type = NULL,
 
   if (!test_debug) {
     stop("Invalid 'debug' argument; debug must be a function to call ",
-         "(can be a string, symbol, call, or a function).",
-         call. = FALSE)
+      "(can be a string, symbol, call, or a function).",
+      call. = FALSE
+    )
   }
 
   ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = switch (type,
-                   panel = GeomDebugPanel,
-                   group = GeomDebugGroup
+    geom = switch(type,
+      panel = GeomDebugPanel,
+      group = GeomDebugGroup
     ),
     position = position,
     show.legend = FALSE,
     inherit.aes = inherit.aes,
     params = list(debug = debug, ...)
   )
-
 }
 
 draw_debug <- function(data, panel_params, coord, debug, ...) {
-
   coords <- coord$transform(data, panel_params)
   debug(coords, ...)
-
 }
 
 #' @rdname ggplot2-ggproto
@@ -67,7 +66,8 @@ GeomDebugPanel <- ggplot2::ggproto(
   ## No required_aes
   ## No default_aes
   ## No draw_key
-  draw_panel = draw_debug)
+  draw_panel = draw_debug
+)
 
 #' @rdname ggplot2-ggproto
 #' @format NULL
@@ -78,4 +78,5 @@ GeomDebugGroup <- ggplot2::ggproto(
   ## No required_aes
   ## No default_aes
   ## No draw_key
-  draw_group = draw_debug)
+  draw_group = draw_debug
+)

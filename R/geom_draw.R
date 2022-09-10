@@ -33,54 +33,45 @@
 #'   hjust = c(0, 0, 0.5, 1, 1),
 #'   vjust = c(0, 1, 0.5, 0, 1)
 #' )
-#' ggplot2::ggplot(data.frame(x = 1, y = 2))+
+#' ggplot2::ggplot(data.frame(x = 1, y = 2)) +
 #'   geom_draw(ggdraw_text)
 #' @export
 geom_draw <- function(draw = grid::nullGrob(), type = NULL,
                       mapping = NULL, data = NULL, stat = "identity",
                       position = "identity", ..., inherit.aes = TRUE) {
-
-  if (is.null(type)) type <- "group" else {
-    type <- tolower(as.character(type))
-    type <- match.arg(type, c("group", "panel"))
-  }
-
-  test_draw <- grid::is.grob(draw) || rlang::is_function(draw) || rlang::is_scalar_character(draw) || rlang::is_symbol(draw)
+  type <- match.arg(type, c("group", "panel"))
+  test_draw <- grid::is.grob(draw) || rlang::is_function(draw) ||
+    rlang::is_scalar_character(draw) || rlang::is_symbol(draw)
 
   if (!test_draw) {
     stop("Invalid 'draw' argument; draw must be a grob ",
-         "or a function to call (can be a string, ",
-         "symbol, call, or a function).",
-         call. = FALSE)
+      "or a function to call (can be a string, ",
+      "symbol, call, or a function).",
+      call. = FALSE
+    )
   }
 
   ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = switch (type,
-                   panel = GeomDrawPanel,
-                   group = GeomDrawGroup
+    geom = switch(type,
+      panel = GeomDrawPanel,
+      group = GeomDrawGroup
     ),
     position = position,
     show.legend = FALSE,
     inherit.aes = inherit.aes,
     params = list(draw = draw, ...)
   )
-
 }
 
 draw_fn <- function(data, panel_params, coord, draw, ...) {
-
   if (grid::is.grob(draw)) {
-
     draw
-
   } else {
-
     coords <- coord$transform(data, panel_params)
     rlang::exec(draw, data = data, coords = coords, ...)
-
   }
 }
 
@@ -101,7 +92,8 @@ GeomDrawPanel <- ggplot2::ggproto(
   ## No required_aes
   ## No default_aes
   ## No draw_key
-  draw_panel = draw_fn)
+  draw_panel = draw_fn
+)
 
 #' @rdname ggplot2-ggproto
 #' @format NULL
@@ -112,4 +104,5 @@ GeomDrawGroup <- ggplot2::ggproto(
   ## No required_aes
   ## No default_aes
   ## No draw_key
-  draw_group = draw_fn)
+  draw_group = draw_fn
+)
